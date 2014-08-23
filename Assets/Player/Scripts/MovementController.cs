@@ -7,6 +7,8 @@ public class MovementController : MonoBehaviour {
     public float jumpForce = 3.0f;
     public float airControl = 0.0f;
 
+    private Spell activeSpell;
+
 	// Use this for initialization
 	void Start () {
         Screen.showCursor = false;
@@ -57,9 +59,6 @@ public class MovementController : MonoBehaviour {
             rigidbody.velocity = XZSpeed;
         }
         
-        //rigidbody.AddForce(direction * (IsOnGround() ? movementSpeed : airControl), ForceMode.VelocityChange);
-        //rigidbody.MovePosition(this.transform.position + direction * (IsOnGround() ? movementSpeed : airControl));
-
         //Rotating
         transform.Rotate(Vector3.up, rotationSpeed * Input.GetAxis("Mouse X"));
         Camera.main.transform.localEulerAngles = new Vector3(-rotationSpeed * Input.GetAxis("Mouse Y") + Camera.main.transform.localEulerAngles.x, 0);
@@ -70,9 +69,14 @@ public class MovementController : MonoBehaviour {
             Jump();
         }
 
+        if (activeSpell != null)
+            activeSpell.SpellUpdate();
 
-
-        Debug.Log(rigidbody.velocity.magnitude);
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            activeSpell = new Telekinesis(gameObject);
+            Debug.Log("Telekinesis");
+        }
 	}
 
     private void Jump()
