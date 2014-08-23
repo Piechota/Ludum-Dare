@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class MovementController : MonoBehaviour {
-    public float movementSpeed = 0.03f;
+    public float movementSpeed = 5.0f;
     public float rotationSpeed = 2.0f;
-    public float jumpForce = 3000.0f;
+    public float jumpForce = 3.0f;
     public float airControl = 0.0f;
 
 	// Use this for initialization
@@ -77,7 +77,7 @@ public class MovementController : MonoBehaviour {
 
     private void Jump()
     {
-        rigidbody.AddForce(Vector3.up * jumpForce);
+        rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
     }
 
     public bool IsOnGround()
@@ -85,7 +85,7 @@ public class MovementController : MonoBehaviour {
         CapsuleCollider cc = GetComponent<CapsuleCollider>();
 
         cc.enabled = false;
-        bool returned = Physics.Raycast(new Ray(transform.position, Vector3.down), cc.height * transform.localScale.x / 2);
+        bool returned = Physics.Raycast(new Ray(transform.position, Vector3.down), cc.height * transform.localScale.x / 2 + 0.1f);
         cc.enabled = true;
 
         return returned;
