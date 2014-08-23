@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour {
     public float rotationSpeed = 2.0f;
     public float jumpForce = 3.0f;
     public float airControl = 0.0f;
+    public float heightTest = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -85,7 +86,7 @@ public class MovementController : MonoBehaviour {
         CapsuleCollider cc = GetComponent<CapsuleCollider>();
 
         cc.enabled = false;
-        bool returned = Physics.Raycast(new Ray(transform.position, Vector3.down), cc.height * transform.localScale.x / 2 + 0.1f);
+        bool returned = Physics.Raycast(new Ray(transform.position, Vector3.down), cc.height * transform.localScale.x / 2 + heightTest);
         cc.enabled = true;
 
         return returned;
