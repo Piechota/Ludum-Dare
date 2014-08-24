@@ -11,6 +11,5 @@ public class TelekinesisObject : MonoBehaviour {
         if (!(rigid = GetComponent<Rigidbody>()))
             rigid = gameObject.AddComponent<Rigidbody>();
 
-        rigid.freezeRotation = true;
 	}
 }

@@ -8,7 +8,7 @@ public class Telekinesis : Spell {
     Vector3 oldPlayerPosition;
     Vector3 playerDeltaPosition { get { return player.transform.position - oldPlayerPosition; } }
 
-    float minDistance = 0.1f;
+    float minDistance = 0.3f;
     float maxDistance = 2.5f;
     float maxObjectSpeed = 3.0f;
     float maxObjectRotateSpeed = 5.0f;
@@ -22,7 +22,9 @@ public class Telekinesis : Spell {
         if (Input.GetMouseButtonUp(0) && selected)
         {
             selected.isInForce = false;
-            selected.GetComponent<Rigidbody>().useGravity = true;
+            selected.rigidbody.useGravity = true;
+            selected.rigidbody.freezeRotation = false;
+
             selected = null;
         }
         if (Input.GetMouseButtonDown(0))
@@ -37,7 +39,8 @@ public class Telekinesis : Spell {
                     {
                         selected = hit.collider.GetComponent<TelekinesisObject>();
                         selected.transform.position += new Vector3(0.0f, 0.1f, 0.0f);
-                        selected.GetComponent<Rigidbody>().useGravity = false;
+                        selected.rigidbody.useGravity = false;
+                        selected.rigidbody.freezeRotation = true;
                         startMouse = Vector2.zero;
 
                         selected.isInForce = true;
@@ -113,18 +116,18 @@ public class Telekinesis : Spell {
                 direction = (direction.magnitude > maxObjectSpeed) ? (direction.normalized * maxObjectSpeed) : direction;
 
                 Vector3 selectedPosition = selected.transform.position + direction;
+
+                Vector3 oldObjectPosition = selected.transform.position;
+                selected.rigidbody.MovePosition(selectedPosition);
                 
 
-                if (Physics.Raycast(player.transform.position, selectedPosition - player.transform.position, out hit))
+                if (Physics.Raycast(player.transform.position, selected.transform.position - player.transform.position, out hit))
                 {
-                    if (hit.collider.gameObject == player.gameObject || hit.collider.gameObject == selected.gameObject)
+                    if ((hit.collider.gameObject != player.gameObject && hit.collider.gameObject != selected.gameObject)||
+                        (hit.point - player.transform.position).magnitude < minDistance ||
+                        (hit.point - player.transform.position).magnitude > maxDistance)
                     {
-                        selectedPosition = ((selectedPosition - player.transform.position).magnitude < minDistance) ? selected.transform.position : selectedPosition;
-                        selectedPosition = ((selectedPosition - player.transform.position).magnitude > maxDistance) ? selected.transform.position : selectedPosition;
-                    }
-                    else
-                    {
-                        selectedPosition = selected.transform.position;
+                        selected.transform.position = oldObjectPosition;
                     }
                 }
 
@@ -132,7 +135,6 @@ public class Telekinesis : Spell {
                 //                                           selected.transform.position.y,
                 //                                           player.transform.position.z + distanceToObject.y);
 
-                selected.rigidbody.MovePosition(selectedPosition);
 
                 Vector3 playerLookAt = selected.transform.position - player.transform.position;
                 playerLookAt.y = 0.0f;
