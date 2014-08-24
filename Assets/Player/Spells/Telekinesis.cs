@@ -5,7 +5,8 @@ public class Telekinesis : Spell {
 
     TelekinesisObject selected;
     Vector2 startMouse = Vector2.zero;
-    Vector2 distanceToObject;
+    Vector3 oldPlayerPosition;
+    Vector3 playerDeltaPosition { get { return player.transform.position - oldPlayerPosition; } }
 
     float minDistance = 0.1f;
     float maxDistance = 2.5f;
@@ -38,8 +39,7 @@ public class Telekinesis : Spell {
                         selected.GetComponent<Rigidbody>().useGravity = false;
                         startMouse = Vector2.zero;
 
-                        distanceToObject =  new Vector2(selected.transform.position.x, selected.transform.position.z)-
-                                            new Vector2(player.transform.position.x, player.transform.position.z);
+                        oldPlayerPosition = player.transform.position;
                     }
                     else { /*tu bedzie jakiś dzwiek, particle itp oznaczajace niepowodzenie*/}
                 }
@@ -69,9 +69,15 @@ public class Telekinesis : Spell {
                 //                                               selected.transform.position.y,
                 //                                               player.transform.position.z + distanceToObject.y);
                 //}
-                
+               
                 
                 selected.rigidbody.velocity = Vector3.zero;
+
+                if (playerDeltaPosition.magnitude != 0)
+                {
+                    selected.transform.position = selected.transform.position + playerDeltaPosition;
+                    oldPlayerPosition = player.transform.position;
+                }
 
                 Vector3 direction = Vector3.zero;
 
@@ -124,10 +130,6 @@ public class Telekinesis : Spell {
                 //                                           player.transform.position.z + distanceToObject.y);
 
                 selected.rigidbody.MovePosition(selectedPosition);
-
-
-                distanceToObject = new Vector2(selected.transform.position.x, selected.transform.position.z) -
-                                            new Vector2(player.transform.position.x, player.transform.position.z);
 
                 Vector3 playerLookAt = selected.transform.position - player.transform.position;
                 playerLookAt.y = 0.0f;
