@@ -38,12 +38,10 @@ public class Telekinesis : Spell {
                     if (hit.collider.GetComponent<TelekinesisObject>())
                     {
                         selected = hit.collider.GetComponent<TelekinesisObject>();
-                        selected.transform.position += new Vector3(0.0f, 0.1f, 0.0f);
-                        selected.rigidbody.useGravity = false;
-                        selected.rigidbody.freezeRotation = true;
+                        selected.UseForce();
+
                         startMouse = Vector2.zero;
 
-                        selected.isInForce = true;
 
                         oldPlayerPosition = player.transform.position;
                     }
