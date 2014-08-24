@@ -21,6 +21,7 @@ public class Telekinesis : Spell {
     {
         if (Input.GetMouseButtonUp(0) && selected)
         {
+            selected.isInForce = false;
             selected.GetComponent<Rigidbody>().useGravity = true;
             selected = null;
         }
@@ -38,6 +39,8 @@ public class Telekinesis : Spell {
                         selected.transform.position += new Vector3(0.0f, 0.1f, 0.0f);
                         selected.GetComponent<Rigidbody>().useGravity = false;
                         startMouse = Vector2.zero;
+
+                        selected.isInForce = true;
 
                         oldPlayerPosition = player.transform.position;
                     }
