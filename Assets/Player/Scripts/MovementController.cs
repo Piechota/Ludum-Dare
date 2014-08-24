@@ -46,6 +46,11 @@ public class MovementController : MonoBehaviour {
         if (Input.GetKey(KeyCode.Escape))
             Application.Quit();
 
+        if (Input.GetKey(KeyCode.F))
+            GameController.Instance.SwitchText("dziala");
+        if (Input.GetKey(KeyCode.E))
+            GameController.Instance.SwitchText(string.Empty);
+
         direction.Normalize();
 
         direction *= (IsOnGround() ? movementSpeed : airControl);
