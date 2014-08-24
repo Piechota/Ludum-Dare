@@ -64,16 +64,6 @@ public class Telekinesis : Spell {
             {
                 //directionNoise.change(0.99f, 0.1f);
                 //float randomDirection = directionNoise.get();
-                //if (Input.GetKeyDown(KeyCode.W) ||
-                //    Input.GetKeyDown(KeyCode.S) ||
-                //    Input.GetKeyDown(KeyCode.D) ||
-                //    Input.GetKeyDown(KeyCode.A))
-                //{
-                //    selected.transform.position = new Vector3(player.transform.position.x + distanceToObject.x,
-                //                                               selected.transform.position.y,
-                //                                               player.transform.position.z + distanceToObject.y);
-                //}
-               
                 
                 selected.rigidbody.velocity = Vector3.zero;
 
@@ -109,7 +99,7 @@ public class Telekinesis : Spell {
                 {
                     direction = Vector3.up;
                 }
-                direction *= startMouse.y / (130 * selected.rigidbody.mass * selected.rigidbody.mass);
+                direction *= startMouse.y / (200 * selected.rigidbody.mass * selected.rigidbody.mass);
 
                 direction = (direction.magnitude > maxObjectSpeed) ? (direction.normalized * maxObjectSpeed) : direction;
 
@@ -122,7 +112,7 @@ public class Telekinesis : Spell {
                 if (Physics.Raycast(player.transform.position, selected.transform.position - player.transform.position, out hit))
                 {
                     if ((hit.collider.gameObject != player.gameObject && hit.collider.gameObject != selected.gameObject)||
-                        (hit.point - player.transform.position).magnitude < minDistance ||
+                        (new Vector2(hit.point.x, hit.point.z) - new Vector2(player.transform.position.x, player.transform.position.z)).magnitude < minDistance ||
                         (hit.point - player.transform.position).magnitude > maxDistance)
                     {
                         selected.transform.position = oldObjectPosition;
