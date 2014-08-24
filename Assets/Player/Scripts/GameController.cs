@@ -34,13 +34,19 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        if (!GetComponent<GUIText>())
+            gameObject.AddComponent<GUIText>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void SwitchText(string text)
+    {
+        guiText.text = text;
     }
 
     public void SpawnPlayer(bool isNilfheim)
