@@ -24,6 +24,7 @@ public class Move : MonoBehaviour {
 
     void OnDestroy()
     {
-        sound1.Stop();
+        if (sound1 != null)
+            sound1.Stop();
     }
 }

@@ -59,6 +59,7 @@
      <Compile Include="Assets\Objects\OnCollisionShow.cs" />
      <Compile Include="Assets\Objects\Portal.cs" />
      <Compile Include="Assets\Objects\TelekinesisObject.cs" />
+     <Compile Include="Assets\Optimalize.cs" />
      <Compile Include="Assets\Player\Scripts\Dialogs.cs" />
      <Compile Include="Assets\Player\Scripts\Dialogs2.cs" />
      <Compile Include="Assets\Player\Scripts\GameController.cs" />

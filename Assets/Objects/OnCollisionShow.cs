@@ -2,27 +2,16 @@
 using System.Collections;
 
 public class OnCollisionShow : MonoBehaviour {
-    MeshRenderer mr;
+
+    public GameObject forDelete;
+
 	// Use this for initialization
 	void Start () {
-        if (!(mr = GetComponent<MeshRenderer>()))
-            mr = GetComponentInChildren<MeshRenderer>();
-
-        if (!mr)
-            return;
-
-		mr.enabled = false;
-
-        if(mr.collider)
-            mr.collider.enabled = false;
+        forDelete.SetActive(false);
 	}
 	void OnTriggerEnter()
 	{
-        if (!mr)
-            return;
-
-        mr.enabled = true;
-        if (mr.collider)
-            mr.collider.enabled = true;
+        if(forDelete)
+        forDelete.SetActive(true);
     }
 }
