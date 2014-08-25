@@ -16,7 +16,7 @@ public class Dialogs2 : MonoBehaviour {
 
     void OnTriggerEnter(Collider player)
     {
-        if ((player.gameObject != GameController.Instance.player) || !playOnTrigger)
+        if ((player.gameObject != GameController.Instance.playerBright && player.gameObject != GameController.Instance.playerDark) || !playOnTrigger)
             return;
 
         PlayDialog();
@@ -24,7 +24,12 @@ public class Dialogs2 : MonoBehaviour {
 
     public void PlayDialog()
     {
-        GameController.Instance.player.audio.PlayOneShot(dialog);
+
+        if (GameController.Instance.playerBright.active == true)
+            GameController.Instance.playerBright.audio.PlayOneShot(dialog);
+        if (GameController.Instance.playerDark.active == true)
+            GameController.Instance.playerDark.audio.PlayOneShot(dialog);
+
         if (nextDialog)
             nextDialog.SetActive(true);
         gameObject.SetActive(false);

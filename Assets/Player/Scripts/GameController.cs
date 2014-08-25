@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour
     public GameObject playerBright, playerDark;
     public List<GameObject> DesertSpawns;
     public List<GameObject> NilfheimSpaws;
-    public GameObject player;
 
     private static Object locker;
     private static GameController _instance;
