@@ -9,7 +9,7 @@ public class Button : MonoBehaviour {
 	public Move moveButton;
 	public Move door;
 
-	public void Activate()
+	public void OnTriggerEnter()
 	{
 		moveButton.Activate();
 		Destroy( moveButton, time);

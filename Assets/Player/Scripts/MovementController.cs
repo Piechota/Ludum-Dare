@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class MovementController : MonoBehaviour {
-    public float movementSpeed = 5.0f;
+    public float movementSpeed = 7.0f;
     public float rotationSpeed = 2.0f;
-    public float jumpForce = 3.0f;
+    public float jumpForce = 6.0f;
     public float airControl = 0.0f;
     public float heightTest = 0.5f;
 

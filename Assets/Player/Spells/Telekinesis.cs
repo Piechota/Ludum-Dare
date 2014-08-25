@@ -13,6 +13,9 @@ public class Telekinesis : Spell {
     float maxObjectSpeed = 3.0f;
     float maxObjectRotateSpeed = 5.0f;
 
+    float rotateDrag = 100.0f;
+    float moveDrag = 800.0f;
+
     //Noise directionNoise = new Noise(0);
 
     public Telekinesis(GameObject player) : base(player) { }
@@ -75,7 +78,7 @@ public class Telekinesis : Spell {
 
                 Vector3 direction = Vector3.zero;
 
-                float angle = startMouse.x / (100 * selected.rigidbody.mass);
+                float angle = startMouse.x / (rotateDrag * selected.rigidbody.mass);
                 angle = (angle > maxObjectRotateSpeed) ? maxObjectRotateSpeed : angle;
                 selected.transform.RotateAround(player.transform.position, Vector3.up, angle);
 
@@ -99,7 +102,7 @@ public class Telekinesis : Spell {
                 {
                     direction = Vector3.up;
                 }
-                direction *= startMouse.y / (200 * selected.rigidbody.mass * selected.rigidbody.mass);
+                direction *= startMouse.y / (moveDrag * selected.rigidbody.mass * selected.rigidbody.mass);
 
                 direction = (direction.magnitude > maxObjectSpeed) ? (direction.normalized * maxObjectSpeed) : direction;
 
