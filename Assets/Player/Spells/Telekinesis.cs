@@ -94,10 +94,6 @@ public class Telekinesis : Spell {
                     }
                 }
 
-                angle = startMouse.y / (rotateDrag * selected.rigidbody.mass);
-                angle = (angle > maxObjectRotateSpeed) ? maxObjectRotateSpeed : angle;
-                selected.transform.RotateAround(player.transform.position, Vector3.right, angle);
-                
                 if(Input.GetMouseButton(1))
                 {
                         direction = selected.transform.position - player.transform.position;
@@ -106,8 +102,22 @@ public class Telekinesis : Spell {
                 }
                 else
                 {
-                    direction = Vector3.up;
+                    angle = startMouse.y / (rotateDrag * selected.rigidbody.mass);
+                    angle = (angle > maxObjectRotateSpeed) ? maxObjectRotateSpeed : angle;
+                    selected.transform.RotateAround(player.transform.position, player.transform.right, -angle);
+
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        if ((hit.collider.gameObject != player.gameObject && hit.collider.gameObject != selected.gameObject) ||
+                            (new Vector2(hit.point.x, hit.point.z) - new Vector2(player.transform.position.x, player.transform.position.z)).magnitude < minDistance ||
+                            (hit.point - player.transform.position).magnitude > maxDistance)
+                        {
+                            selected.transform.RotateAround(player.transform.position, player.transform.right, angle);
+                            startMouse = Vector2.zero;
+                        }
+                    }
                 }
+                
                 direction *= startMouse.y / (moveDrag * selected.rigidbody.mass * selected.rigidbody.mass);
 
                 direction = (direction.magnitude > maxObjectSpeed) ? (direction.normalized * maxObjectSpeed) : direction;

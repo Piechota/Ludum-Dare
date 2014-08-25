@@ -54,6 +54,7 @@
      <Compile Include="Assets\Objects\MjölnirPushPlate.cs" />
      <Compile Include="Assets\Objects\Move.cs" />
      <Compile Include="Assets\Objects\Noise.cs" />
+     <Compile Include="Assets\Objects\Portal.cs" />
      <Compile Include="Assets\Objects\TelekinesisObject.cs" />
      <Compile Include="Assets\Player\Scripts\Dialogs.cs" />
      <Compile Include="Assets\Player\Scripts\GameController.cs" />

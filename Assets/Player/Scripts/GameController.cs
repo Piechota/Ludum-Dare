@@ -6,8 +6,8 @@ public class GameController : MonoBehaviour
 {
 
     public GameObject playerBright, playerDark;
-    public Queue<GameObject> DesertSpawns;
-    public Queue<GameObject> NilfheimSpaws;
+    public List<GameObject> DesertSpawns;
+    public List<GameObject> NilfheimSpaws;
 
     private static Object locker;
     private static GameController _instance;
@@ -56,17 +56,22 @@ public class GameController : MonoBehaviour
 
         if (isNilfheim)
         {
-            SpawnAtPlayerAtPoint(NilfheimSpaws.Dequeue(), playerDark);
+            GameObject nilfheim = NilfheimSpaws[0];
+            NilfheimSpaws.Remove(nilfheim);
+            SpawnAtPlayerAtPoint(nilfheim, playerDark);
         }
         else
         {
-            SpawnAtPlayerAtPoint(DesertSpawns.Dequeue(), playerDark);
+            GameObject desert = DesertSpawns[0];
+            DesertSpawns.Remove(desert);
+            SpawnAtPlayerAtPoint(desert, playerBright);
         }
     }
 
     private void SpawnAtPlayerAtPoint(GameObject spawner, GameObject player)
     {
         player.transform.position = spawner.transform.position;
+        player.transform.LookAt(player.transform.position + spawner.transform.forward);
         player.SetActive(true);
     }
 }
