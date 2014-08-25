@@ -9,8 +9,12 @@ public class Button : MonoBehaviour {
 	public Move moveButton;
 	public Move door;
 
+    public Vector3 doorSpeed;
+
 	public void OnTriggerEnter()
 	{
+        door.speed = doorSpeed;
+
 		moveButton.Activate();
 		Destroy( moveButton, time);
 
