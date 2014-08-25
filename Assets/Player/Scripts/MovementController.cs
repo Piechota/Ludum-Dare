@@ -8,6 +8,14 @@ public class MovementController : MonoBehaviour {
     public float airControl = 0.0f;
     public float heightTest = 0.5f;
 
+    public float minDistance = 0.3f;
+    public float maxDistance = 2.5f;
+    public float maxObjectSpeed = 3.0f;
+    public float maxObjectRotateSpeed = 5.0f;
+
+    public float rotateDrag = 100.0f;
+    public float moveDrag = 800.0f;
+
     private Spell activeSpell;
 
 	// Use this for initialization

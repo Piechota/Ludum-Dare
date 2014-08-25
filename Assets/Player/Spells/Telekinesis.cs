@@ -8,13 +8,7 @@ public class Telekinesis : Spell {
     Vector3 oldPlayerPosition;
     Vector3 playerDeltaPosition { get { return player.transform.position - oldPlayerPosition; } }
 
-    float minDistance = 0.3f;
-    float maxDistance = 2.5f;
-    float maxObjectSpeed = 3.0f;
-    float maxObjectRotateSpeed = 5.0f;
-
-    float rotateDrag = 100.0f;
-    float moveDrag = 800.0f;
+    
 
     //Noise directionNoise = new Noise(0);
 
@@ -38,7 +32,7 @@ public class Telekinesis : Spell {
             
             if (selected == null)
             {
-                if (Physics.Raycast(ray, out hit, maxDistance))
+                if (Physics.Raycast(ray, out hit, playerMC.maxDistance))
                 {
                     if (hit.collider.GetComponent<TelekinesisObject>())
                     {
@@ -79,8 +73,8 @@ public class Telekinesis : Spell {
 
                 Vector3 direction = Vector3.zero;
 
-                float angle = startMouse.x / (rotateDrag * selected.rigidbody.mass);
-                angle = (angle > maxObjectRotateSpeed) ? maxObjectRotateSpeed : angle;
+                float angle = startMouse.x / (playerMC.rotateDrag * selected.rigidbody.mass);
+                angle = (angle > playerMC.maxObjectRotateSpeed) ? playerMC.maxObjectRotateSpeed : angle;
                 selected.transform.RotateAround(player.transform.position, Vector3.up, angle);
 
                 
@@ -102,25 +96,25 @@ public class Telekinesis : Spell {
                 }
                 else
                 {
-                    angle = startMouse.y / (rotateDrag * selected.rigidbody.mass);
-                    angle = (angle > maxObjectRotateSpeed) ? maxObjectRotateSpeed : angle;
+                    angle = startMouse.y / (playerMC.rotateDrag * selected.rigidbody.mass);
+                    angle = (angle > playerMC.maxObjectRotateSpeed) ? playerMC.maxObjectRotateSpeed : angle;
                     selected.transform.RotateAround(player.transform.position, player.transform.right, -angle);
 
                     if (Physics.Raycast(ray, out hit))
                     {
                         if ((hit.collider.gameObject != player.gameObject && hit.collider.gameObject != selected.gameObject) ||
-                            (new Vector2(hit.point.x, hit.point.z) - new Vector2(player.transform.position.x, player.transform.position.z)).magnitude < minDistance ||
-                            (hit.point - player.transform.position).magnitude > maxDistance)
+                            (new Vector2(hit.point.x, hit.point.z) - new Vector2(player.transform.position.x, player.transform.position.z)).magnitude < playerMC.minDistance ||
+                            (hit.point - player.transform.position).magnitude > playerMC.maxDistance)
                         {
                             selected.transform.RotateAround(player.transform.position, player.transform.right, angle);
                             startMouse = Vector2.zero;
                         }
                     }
                 }
-                
-                direction *= startMouse.y / (moveDrag * selected.rigidbody.mass * selected.rigidbody.mass);
 
-                direction = (direction.magnitude > maxObjectSpeed) ? (direction.normalized * maxObjectSpeed) : direction;
+                direction *= startMouse.y / (playerMC.moveDrag * selected.rigidbody.mass * selected.rigidbody.mass);
+
+                direction = (direction.magnitude > playerMC.maxObjectSpeed) ? (direction.normalized * playerMC.maxObjectSpeed) : direction;
 
                 Vector3 selectedPosition = selected.transform.position + direction;
 
@@ -131,8 +125,8 @@ public class Telekinesis : Spell {
                 if (Physics.Raycast(ray, out hit))
                 {
                     if ((hit.collider.gameObject != player.gameObject && hit.collider.gameObject != selected.gameObject)||
-                        (new Vector2(hit.point.x, hit.point.z) - new Vector2(player.transform.position.x, player.transform.position.z)).magnitude < minDistance ||
-                        (hit.point - player.transform.position).magnitude > maxDistance)
+                        (new Vector2(hit.point.x, hit.point.z) - new Vector2(player.transform.position.x, player.transform.position.z)).magnitude < playerMC.minDistance ||
+                        (hit.point - player.transform.position).magnitude > playerMC.maxDistance)
                     {
                         selected.transform.position = oldObjectPosition;
                         startMouse = Vector2.zero;
