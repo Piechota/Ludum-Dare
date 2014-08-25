@@ -92,7 +92,7 @@ public class Telekinesis : Spell {
                 }
 
                 
-                if(!Input.GetMouseButton(1))
+                if(Input.GetMouseButton(1))
                 {
                         direction = selected.transform.position - player.transform.position;
                         direction.y = 0.0f;
@@ -119,13 +119,9 @@ public class Telekinesis : Spell {
                         (hit.point - player.transform.position).magnitude > maxDistance)
                     {
                         selected.transform.position = oldObjectPosition;
+                        startMouse = Vector2.zero;
                     }
                 }
-
-                //selected.transform.position = new Vector3(player.transform.position.x + distanceToObject.x,
-                //                                           selected.transform.position.y,
-                //                                           player.transform.position.z + distanceToObject.y);
-
 
                 Vector3 playerLookAt = selected.transform.position - player.transform.position;
                 playerLookAt.y = 0.0f;
