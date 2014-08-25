@@ -13,7 +13,8 @@ public class MovementController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Screen.showCursor = false;
-	}
+        activeSpell = new Telekinesis(gameObject);
+    }
 
     void FixedUpdate()
     {
@@ -81,7 +82,6 @@ public class MovementController : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             activeSpell = new Telekinesis(gameObject);
-            Debug.Log("Telekinesis");
         }
 	}
 

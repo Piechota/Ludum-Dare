@@ -22,6 +22,9 @@ public class Telekinesis : Spell {
 
     public override void SpellUpdate()
     {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        RaycastHit hit;
+
         if (Input.GetMouseButtonUp(0) && selected)
         {
             selected.isInForce = false;
@@ -32,10 +35,9 @@ public class Telekinesis : Spell {
         }
         if (Input.GetMouseButtonDown(0))
         {
+            
             if (selected == null)
             {
-                Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-                RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, maxDistance))
                 {
                     if (hit.collider.GetComponent<TelekinesisObject>())
@@ -44,7 +46,6 @@ public class Telekinesis : Spell {
                         selected.UseForce();
 
                         startMouse = Vector2.zero;
-
 
                         oldPlayerPosition = player.transform.position;
                     }
@@ -82,15 +83,20 @@ public class Telekinesis : Spell {
                 angle = (angle > maxObjectRotateSpeed) ? maxObjectRotateSpeed : angle;
                 selected.transform.RotateAround(player.transform.position, Vector3.up, angle);
 
-                RaycastHit hit;
-                if (Physics.Raycast(player.transform.position, selected.transform.position - player.transform.position, out hit))
+                
+
+                if (Physics.Raycast(ray, out hit))
                 {
                     if (hit.collider.gameObject != player.gameObject && hit.collider.gameObject != selected.gameObject)
                     {
                         selected.transform.RotateAround(player.transform.position, Vector3.up, -angle);
+                        startMouse = Vector2.zero;
                     }
                 }
 
+                angle = startMouse.y / (rotateDrag * selected.rigidbody.mass);
+                angle = (angle > maxObjectRotateSpeed) ? maxObjectRotateSpeed : angle;
+                selected.transform.RotateAround(player.transform.position, Vector3.right, angle);
                 
                 if(Input.GetMouseButton(1))
                 {
@@ -112,7 +118,7 @@ public class Telekinesis : Spell {
                 selected.rigidbody.MovePosition(selectedPosition);
                 
 
-                if (Physics.Raycast(player.transform.position, selected.transform.position - player.transform.position, out hit))
+                if (Physics.Raycast(ray, out hit))
                 {
                     if ((hit.collider.gameObject != player.gameObject && hit.collider.gameObject != selected.gameObject)||
                         (new Vector2(hit.point.x, hit.point.z) - new Vector2(player.transform.position.x, player.transform.position.z)).magnitude < minDistance ||

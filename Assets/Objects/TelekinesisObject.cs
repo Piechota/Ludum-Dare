@@ -35,6 +35,7 @@ public class TelekinesisObject : MonoBehaviour {
     {
         rigidbody.useGravity = false;
         rigidbody.freezeRotation = true;
+        rigidbody.isKinematic = false;
         isInForce = true;
         yMove = 0.0f;
     }
