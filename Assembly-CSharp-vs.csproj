@@ -65,6 +65,8 @@
      <Compile Include="Assets\Player\Scripts\EndGameEnable.cs" />
      <Compile Include="Assets\Player\Scripts\GameController.cs" />
      <Compile Include="Assets\Player\Scripts\MovementController.cs" />
+     <Compile Include="Assets\Player\Scripts\Outro.cs" />
+     <Compile Include="Assets\Player\Scripts\PlayOutro.cs" />
      <Compile Include="Assets\Player\Spells\Spell.cs" />
      <Compile Include="Assets\Player\Spells\Telekinesis.cs" />
      <Compile Include="Assets\PostProcesses2.0\Shafts\Shafts.cs" />
