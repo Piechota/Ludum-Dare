@@ -70,8 +70,10 @@ public class GameController : MonoBehaviour
 
     private void SpawnAtPlayerAtPoint(GameObject spawner, GameObject player)
     {
+
         player.transform.position = spawner.transform.position;
         player.transform.LookAt(player.transform.position + spawner.transform.forward);
+        player.rigidbody.velocity = Vector3.zero;
         player.SetActive(true);
     }
 }
