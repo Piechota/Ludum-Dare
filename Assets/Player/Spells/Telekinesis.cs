@@ -8,6 +8,8 @@ public class Telekinesis : Spell {
     Vector3 oldPlayerPosition;
     Vector3 playerDeltaPosition { get { return player.transform.position - oldPlayerPosition; } }
 
+    Vector3 offset;
+    float oldPlayerSpeed;
     
 
     //Noise directionNoise = new Noise(0);
@@ -42,6 +44,11 @@ public class Telekinesis : Spell {
                         startMouse = Vector2.zero;
 
                         oldPlayerPosition = player.transform.position;
+
+                        offset = selected.transform.InverseTransformPoint(hit.point);
+
+                        oldPlayerSpeed = playerMC.movementSpeed;
+                        playerMC.movementSpeed /= (selected.rigidbody.mass / 100);
                     }
                     else { /*tu bedzie jakiś dzwiek, particle itp oznaczajace niepowodzenie*/}
                 }
@@ -133,10 +140,10 @@ public class Telekinesis : Spell {
                     }
                 }
 
-                Vector3 playerLookAt = selected.transform.position - player.transform.position;
+                Vector3 playerLookAt = selected.transform.TransformPoint(offset) - player.transform.position;
                 playerLookAt.y = 0.0f;
-                player.transform.LookAt(player.transform.position + playerLookAt);
-                Camera.main.transform.LookAt(selected.transform.position);
+                player.transform.LookAt(playerLookAt + player.transform.position);
+                Camera.main.transform.LookAt(selected.transform.TransformPoint(offset));
                 // + new Vector3(Mathf.Sin(randomDirection),  Mathf.Cos(Mathf.PI/2 - , 0)
             }
         }
