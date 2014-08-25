@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Elementals\Scripts\OrbitCamera.cs" />
      <Compile Include="Assets\Elementals\Scripts\TestParticles.cs" />
+     <Compile Include="Assets\IntroScript.cs" />
      <Compile Include="Assets\Materials\LookAtPlayer.cs" />
      <Compile Include="Assets\Materials\PullRotation.cs" />
      <Compile Include="Assets\Objects\Button.cs" />
