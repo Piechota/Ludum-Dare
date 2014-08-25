@@ -22,7 +22,6 @@ public class MovementController : MonoBehaviour {
 	void Start () {
         Screen.showCursor = false;
         activeSpell = new Telekinesis(gameObject);
-        GameController.Instance.player = gameObject;
     }
 
     void FixedUpdate()

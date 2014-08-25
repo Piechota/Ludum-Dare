@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{B4402DCE-C7FF-0134-CE74-CDB92EEAF0D3}</ProjectGuid>
+	<ProjectGuid>{158D0937-1968-E4AF-8C7E-D1C57DBBFA3D}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -54,6 +54,8 @@
      <Compile Include="Assets\Objects\MjölnirPushPlate.cs" />
      <Compile Include="Assets\Objects\Move.cs" />
      <Compile Include="Assets\Objects\Noise.cs" />
+     <Compile Include="Assets\Objects\OnCollisionDestroy.cs" />
+     <Compile Include="Assets\Objects\OnCollisionShow.cs" />
      <Compile Include="Assets\Objects\Portal.cs" />
      <Compile Include="Assets\Objects\TelekinesisObject.cs" />
      <Compile Include="Assets\Player\Scripts\Dialogs.cs" />
@@ -150,12 +152,12 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>C:/Users/test1/Documents/Unity Projects/LudumDare/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>C:/Users/Konrad/Desktop/Ludum-Dare/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{B271368A-F0E8-B1AB-072F-5760ECD9E2D5}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+      <Project>{8F628838-5FDB-0C4B-4B43-6235903814F1}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
