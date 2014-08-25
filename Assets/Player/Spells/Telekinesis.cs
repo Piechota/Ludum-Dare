@@ -27,6 +27,8 @@ public class Telekinesis : Spell {
             selected.rigidbody.useGravity = true;
             selected.rigidbody.freezeRotation = false;
 
+            playerMC.movementSpeed = oldPlayerSpeed;
+
             selected = null;
         }
         if (Input.GetMouseButtonDown(0))
