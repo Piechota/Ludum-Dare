@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Dialogs2 : MonoBehaviour {
+public class Dialogs2 : MonoBehaviour
+{
 
     public AudioClip dialog;
 
@@ -32,6 +33,13 @@ public class Dialogs2 : MonoBehaviour {
 
         if (nextDialog)
             nextDialog.SetActive(true);
+        else
+        {
+            if (GameController.Instance.playerBright.active)
+                GameController.Instance.playerBright.GetComponent<MovementController>().EndGame();
+            if (GameController.Instance.playerDark.active)
+                GameController.Instance.playerBright.GetComponent<MovementController>().EndGame();
+        }
         gameObject.SetActive(false);
     }
 }

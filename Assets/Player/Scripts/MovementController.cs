@@ -17,6 +17,7 @@ public class MovementController : MonoBehaviour {
     public float moveDrag = 800.0f;
 
     private Spell activeSpell;
+    private bool isEndGame = false;
 
 	// Use this for initialization
 	void Start () {
@@ -31,6 +32,14 @@ public class MovementController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        if(isEndGame)
+        {
+            if (audio.isPlaying)
+                return;
+
+            GameController.Instance.endCamera.active = true;
+            gameObject.active = false;
+        }
 
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
             Screen.showCursor = false;
@@ -107,5 +116,10 @@ public class MovementController : MonoBehaviour {
         cc.enabled = true;
 
         return returned;
+    }
+
+    public void EndGame()
+    {
+        isEndGame = true;
     }
 }

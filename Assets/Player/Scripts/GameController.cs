@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     public List<GameObject> DesertSpawns;
     public List<GameObject> NilfheimSpaws;
 
+    public GameObject endCamera;
+
     private static Object locker;
     private static GameController _instance;
 

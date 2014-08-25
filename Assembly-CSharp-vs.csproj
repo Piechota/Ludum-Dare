@@ -62,6 +62,7 @@
      <Compile Include="Assets\Optimalize.cs" />
      <Compile Include="Assets\Player\Scripts\Dialogs.cs" />
      <Compile Include="Assets\Player\Scripts\Dialogs2.cs" />
+     <Compile Include="Assets\Player\Scripts\EndGameEnable.cs" />
      <Compile Include="Assets\Player\Scripts\GameController.cs" />
      <Compile Include="Assets\Player\Scripts\MovementController.cs" />
      <Compile Include="Assets\Player\Spells\Spell.cs" />

@@ -34,8 +34,8 @@ public class IntroScript : MonoBehaviour {
         this.audio.Stop();
         Debug.Log("First clip finished");
 
-        this.audio.Play();
         this.audio.clip = impacts;
+        this.audio.Play();        
         yield return new WaitForSeconds(impactsLength);
         this.audio.Stop();
         Debug.Log("Second clip finished");
