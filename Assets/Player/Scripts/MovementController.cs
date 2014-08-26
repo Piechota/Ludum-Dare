@@ -42,7 +42,10 @@ public class MovementController : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
+        {
             Screen.showCursor = false;
+            Screen.lockCursor = true;
+        }
 
         Vector3 direction = Vector3.zero;
 

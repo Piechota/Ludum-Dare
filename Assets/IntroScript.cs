@@ -12,6 +12,8 @@ public class IntroScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Screen.showCursor = false;
+
         StartCoroutine(playIntro());
 	}
 	

@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Screen.lockCursor = true;
         if (!GetComponent<GUIText>())
             gameObject.AddComponent<GUIText>();
     }

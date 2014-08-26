@@ -17,6 +17,7 @@ public class PlayOutro : MonoBehaviour {
         if(wasPlayeng)
         {
             Application.Quit();
+            return;
         }
 
         wasPlayeng = true;
